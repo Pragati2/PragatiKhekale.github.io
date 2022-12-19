@@ -1,3 +1,3 @@
 # Pragati's Resume Website
 
-Link: https://PragatiKhekale.github.io
+Link: https://pragati2.github.io/PragatiKhekale.github.io/
