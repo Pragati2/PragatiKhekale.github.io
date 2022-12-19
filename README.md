@@ -1,3 +1,3 @@
-# Supriti's Resume Website
+# Pragati's Resume Website
 
-Link: https://supritighosh.github.io
+Link: https://PragatiKhekale.github.io
