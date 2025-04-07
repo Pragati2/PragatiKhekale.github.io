@@ -1,0 +1,70 @@
+import React, { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Github, Linkedin, Menu } from "lucide-react";
+
+export default function Portfolio() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
+
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    const handleScroll = () => {
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white text-gray-800 px-8 py-12 md:px-24 scroll-smooth">
+      <nav className="md:flex justify-between items-center mb-12 text-sm font-medium text-blue-700">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">Pragati Khekale</h1>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden">
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+        <div className={`${menuOpen ? 'block' : 'hidden'} md:flex space-x-6 mt-4 md:mt-0`}>
+          {['about', 'skills', 'blog', 'projects', 'resume', 'contact'].map(section => (
+            <a
+              key={section}
+              href={`#${section}`}
+              className={`hover:underline ${activeSection === section ? 'font-bold underline text-blue-900' : ''}`}
+            >
+              {section.charAt(0).toUpperCase() + section.slice(1)}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <header className="mb-16">
+        <h1 className="text-4xl font-bold mb-2">Pragati Khekale</h1>
+        <p className="text-lg text-gray-600">
+          Data Scientist | Machine Learning Engineer | Geospatial Analyst
+        </p>
+        <div className="flex space-x-4 mt-4">
+          <a href="https://github.com/Pragati2" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline"><Github className="mr-2" /> GitHub</Button>
+          </a>
+          <a href="https://linkedin.com/in/pragati-khekale" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline"><Linkedin className="mr-2" /> LinkedIn</Button>
+          </a>
+        </div>
+      </header>
+
+      {/* Sections remain unchanged and follow the same structure */}
+      {/* ... (about, skills, blog, projects, resume, contact) ... */}
+    </div>
+  );
+}
